@@ -357,7 +357,7 @@ section { padding-block: var(--space-16); }
 .quotes { background: var(--bg); }
 .quotes .section-head { margin-bottom: var(--space-8); }
 .quote-feature { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: var(--space-6); align-items: start; }
-.quote-feature__mark { width: 72px; color: var(--accent); margin-top: 6px; }
+.quote-feature__mark { width: 72px; height: auto; color: var(--accent); margin-top: 6px; }
 .quote-feature + .quote-feature { margin-top: var(--space-12); }
 .quote-feature blockquote { margin: 0; }
 .quote-feature__lead {
