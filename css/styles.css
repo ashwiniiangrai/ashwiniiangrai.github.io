@@ -353,12 +353,35 @@ section { padding-block: var(--space-16); }
 .langs li { display: flex; justify-content: space-between; gap: var(--space-2); padding-block: 10px; border-bottom: 1px solid var(--border); }
 .langs li span:last-child { color: var(--text-muted); text-align: right; }
 
-/* Quotes (optional section) */
-.quotes__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-3); }
-.quote { margin: 0; padding: var(--space-4); border: 1px solid var(--border); border-radius: var(--radius); }
-.quote blockquote { margin: 0 0 var(--space-3); font-size: 1.25rem; }
-.quote figcaption { display: grid; color: var(--text-muted); }
-.quote figcaption strong { color: var(--text); font-weight: 500; }
+/* Recommendation */
+.quotes { background: var(--bg); }
+.quotes .section-head { margin-bottom: var(--space-8); }
+.quote-feature { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: var(--space-6); align-items: start; }
+.quote-feature__mark { width: 72px; color: var(--accent); margin-top: 6px; }
+.quote-feature + .quote-feature { margin-top: var(--space-12); }
+.quote-feature blockquote { margin: 0; }
+.quote-feature__lead {
+  font-family: var(--font-display); font-weight: 500; letter-spacing: -0.01em;
+  font-size: clamp(1.5rem, 2.6vw, 2.375rem); line-height: 1.28; max-width: 40ch; text-wrap: pretty;
+}
+.quote-feature__more { margin-top: var(--space-4); max-width: 62ch; font-size: 1.125rem; color: var(--text-muted); font-style: italic; }
+.quote-feature__by {
+  display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-3);
+  margin-top: var(--space-6); padding-top: var(--space-4); border-top: 1px solid var(--border);
+}
+.quote-feature__by strong { display: block; font-weight: 600; }
+.quote-feature__avatar {
+  display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%;
+  background: var(--accent); color: var(--on-accent); font-family: var(--font-mono); font-size: .875rem;
+}
+.quote-feature__role { color: var(--text-muted); font-size: .9375rem; }
+.quote-feature__link { margin-left: auto; color: var(--accent-ink); font-weight: 500; text-underline-offset: 4px; }
+.quote-feature__link:hover { text-decoration-thickness: 2px; }
+@media (max-width: 768px) {
+  .quote-feature { grid-template-columns: 1fr; gap: var(--space-3); }
+  .quote-feature__mark { width: 48px; }
+  .quote-feature__link { margin-left: 0; }
+}
 
 /* ---------- Curved edge into the footer ---------- */
 .curve { position: relative; height: 0; z-index: 5; overflow-x: clip; overflow-y: visible; }
