@@ -197,24 +197,37 @@
   }
 
   /* ---------- Curved footer edge (scroll-driven) ---------- */
-  const curve = document.querySelector('.curve__shape');
+  const curve = document.querySelector('.curve:not(.curve--hero) .curve__shape');
   const footer = document.querySelector('.contact');
+  const heroCurve = document.querySelector('.curve--hero .curve__shape');
+  const heroEl = document.querySelector('.hero');
 
   const curvedSections = [...document.querySelectorAll('.curved-top')];
 
   const onScroll = () => {
     const vh = window.innerHeight;
-    // Section domes: full curve as the section enters, flat once its top reaches ~40% of the screen
+    // Section overlap: the incoming section's dome flattens as it rises, while the
+    // section underneath sinks back a little, so the new one visibly slides over it.
     curvedSections.forEach((sec) => {
       const top = sec.getBoundingClientRect().top;
-      if (top > vh * 1.2 || top < -vh) return;
-      const p = clamp01((vh - top) / (vh * 0.6));
-      sec.style.setProperty('--curve-top', reduceMotion ? '0.6' : String(1 - p));
+      const p = clamp01((vh - top) / (vh * 0.85)); // 0 = still below the screen, 1 = fully risen
+      if (reduceMotion) { sec.style.setProperty('--curve-top', '0.6'); return; }
+      sec.style.setProperty('--curve-top', String(1 - p));
+      const under = sec.previousElementSibling;
+      if (under && under.offsetHeight > vh) { // short sections stay put (no gaps)
+        under.style.transform = p > 0 ? `translate3d(0, ${(p * 90).toFixed(1)}px, 0) scale(${(1 - p * 0.03).toFixed(4)})` : '';
+        under.style.transformOrigin = '50% 100%';
+      }
     });
     if (curve && footer) {
       const top = footer.getBoundingClientRect().top;
       const p = clamp01((vh - top) / (vh * 0.75));
       curve.style.setProperty('--curve', reduceMotion ? '1' : String(1 - p));
+    }
+    if (heroCurve && heroEl) {
+      // full bowl while the front page fills the screen, flat once it has scrolled ~60% away
+      const p = clamp01((vh - heroEl.getBoundingClientRect().bottom) / (vh * 0.6));
+      heroCurve.style.setProperty('--curve', reduceMotion ? '1' : String(1 - p));
     }
   };
   window.addEventListener('scroll', () => requestAnimationFrame(onScroll), { passive: true });
