@@ -215,7 +215,7 @@
       sec.style.setProperty('--curve-top', String(1 - p));
       const under = sec.previousElementSibling;
       if (under && under.offsetHeight > vh) { // short sections stay put (no gaps)
-        under.style.transform = p > 0 ? `translate3d(0, ${(p * 90).toFixed(1)}px, 0) scale(${(1 - p * 0.03).toFixed(4)})` : '';
+        under.style.transform = p > 0 ? `translate3d(0, ${(p * 50).toFixed(1)}px, 0) scale(${(1 - p * 0.02).toFixed(4)})` : '';
         under.style.transformOrigin = '50% 100%';
       }
     });
