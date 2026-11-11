@@ -143,6 +143,9 @@
     revealEls.forEach((el) => el.classList.add('is-in'));
   }
 
+  // The globe spins with SVG animation; freeze it for visitors who turn motion off
+  if (reduceMotion) document.querySelectorAll('svg.globe').forEach((g) => g.pauseAnimations && g.pauseAnimations());
+
   const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   const clamp01 = (v) => Math.min(1, Math.max(0, v));
 
@@ -197,8 +200,17 @@
   const curve = document.querySelector('.curve__shape');
   const footer = document.querySelector('.contact');
 
+  const curvedSections = [...document.querySelectorAll('.curved-top')];
+
   const onScroll = () => {
     const vh = window.innerHeight;
+    // Section domes: full curve as the section enters, flat once its top reaches ~40% of the screen
+    curvedSections.forEach((sec) => {
+      const top = sec.getBoundingClientRect().top;
+      if (top > vh * 1.2 || top < -vh) return;
+      const p = clamp01((vh - top) / (vh * 0.6));
+      sec.style.setProperty('--curve-top', reduceMotion ? '0.6' : String(1 - p));
+    });
     if (curve && footer) {
       const top = footer.getBoundingClientRect().top;
       const p = clamp01((vh - top) / (vh * 0.75));
