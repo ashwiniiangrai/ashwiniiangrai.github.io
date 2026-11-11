@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=2">
+  <link rel="stylesheet" href="css/styles.css?v=8">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -68,7 +68,24 @@
     <div class="hero__location">
       <p>Based in<br>Angers,<br>France</p>
       <span class="hero__globe" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></svg>
+        <!-- Spinning planet: longitude lines sweep across while latitudes stay still -->
+        <svg class="globe" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round">
+          <defs>
+            <radialGradient id="globe-shade" cx="35%" cy="30%" r="75%">
+              <stop offset="0" stop-color="#fff" stop-opacity=".35"/>
+              <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+            </radialGradient>
+            <clipPath id="globe-clip"><circle cx="16" cy="16" r="12"/></clipPath>
+          </defs>
+          <circle cx="16" cy="16" r="12" fill="url(#globe-shade)" stroke="none"/>
+          <g clip-path="url(#globe-clip)">
+            <path d="M4 16h24M5.2 10.5Q16 12.8 26.8 10.5M5.2 21.5Q16 23.8 26.8 21.5" opacity=".75"/>
+            <ellipse cx="16" cy="16" rx="12" ry="12"><animate attributeName="rx" values="12;0;12" dur="6s" begin="0s" repeatCount="indefinite"/></ellipse>
+            <ellipse cx="16" cy="16" rx="8" ry="12"><animate attributeName="rx" values="12;0;12" dur="6s" begin="-2s" repeatCount="indefinite"/></ellipse>
+            <ellipse cx="16" cy="16" rx="4" ry="12"><animate attributeName="rx" values="12;0;12" dur="6s" begin="-4s" repeatCount="indefinite"/></ellipse>
+          </g>
+          <circle cx="16" cy="16" r="12" stroke-width="1.5"/>
+        </svg>
       </span>
     </div>
 
@@ -76,11 +93,15 @@
       <svg class="hero__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 6l12 12M18 8v10H8"/></svg>
       <h1 class="visually-hidden">Ashwini Iangrai, Project Manager moving into Data Analysis</h1>
       <p>Project Manager<br><span class="accent">→ Data &amp; Reporting Analyst</span></p>
+      <div class="hero__cta">
+        <a class="cta cta--solid fill-hover magnetic" href="assets/Ashwini-Iangrai-CV.pdf" download><span>Download CV</span></a>
+        <a class="cta fill-hover magnetic" href="#contact"><span>Get in touch</span></a>
+      </div>
     </div>
 
     <div class="hero__marquee" aria-hidden="true">
       <div class="hero__track">
-        <span>Ashwini Iangrai —</span><span>Ashwini Iangrai —</span>
+        <span>Ashwini Iangrai -</span><span>Ashwini Iangrai -</span>
       </div>
     </div>
   </header>
@@ -98,7 +119,8 @@
         </div>
       </div>
 
-      <div class="container">
+      <div class="stats-band">
+       <div class="container">
         <dl class="stats">
           <div class="stat reveal"><dt>Years of international experience</dt><dd><span class="count" data-to="5">5</span>+</dd></div>
           <div class="stat reveal"><dt>Exhibitor bookings closed personally</dt><dd><span class="count" data-to="130">130</span>+</dd></div>
@@ -106,11 +128,12 @@
           <div class="stat reveal"><dt>Exhibitor return rate between editions</dt><dd><span class="count" data-to="76">76</span>%</dd></div>
           <div class="stat reveal"><dt>Team members led &amp; trained</dt><dd><span class="count" data-to="7">7</span></dd></div>
         </dl>
+       </div>
       </div>
     </section>
 
     <!-- Experience -->
-    <section class="journey" id="journey" aria-labelledby="journey-title">
+    <section class="journey curved-top" id="journey" aria-labelledby="journey-title">
       <div class="container">
         <div class="section-head reveal">
           <p class="eyebrow">01 — Experience</p>
@@ -187,7 +210,7 @@
     </section>
 
     <!-- Data Lab -->
-    <section class="lab" id="data-lab" aria-labelledby="lab-title">
+    <section class="lab curved-top" id="data-lab" aria-labelledby="lab-title">
       <div class="container">
         <div class="section-head reveal">
           <p class="eyebrow">02 — Data Lab</p>
@@ -262,7 +285,7 @@
     </section>
 
     <!-- Recommendation (excerpt from a LinkedIn recommendation). To add more, copy the <figure> block. -->
-    <section class="quotes" aria-labelledby="quotes-title">
+    <section class="quotes curved-top" aria-labelledby="quotes-title">
       <div class="container">
         <div class="section-head reveal">
           <p class="eyebrow">Recommendations</p>
@@ -352,7 +375,7 @@
     </section>
 
     <!-- Skills -->
-    <section class="skills" id="skills" aria-labelledby="skills-title">
+    <section class="skills curved-top" id="skills" aria-labelledby="skills-title">
       <div class="container">
         <div class="section-head reveal">
           <p class="eyebrow">03 — Skills &amp; tools</p>
@@ -381,7 +404,7 @@
     </section>
 
     <!-- Education & languages -->
-    <section class="edu" aria-labelledby="edu-title">
+    <section class="edu curved-top" aria-labelledby="edu-title">
       <div class="container">
         <div class="section-head reveal">
           <p class="eyebrow">04 — Education &amp; languages</p>
@@ -457,7 +480,7 @@
     </div>
   </div>
 
-  <script src="js/main.js?v=2" defer></script>
+  <script src="js/main.js?v=8" defer></script>
 
   <!-- Cloudflare Web Analytics (cookie-free visitor stats) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "cc6e6f82721f4c9493a97cb17cc752d4"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
